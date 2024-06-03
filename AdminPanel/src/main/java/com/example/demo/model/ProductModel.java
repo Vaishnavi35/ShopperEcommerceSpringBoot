@@ -11,10 +11,12 @@ public class ProductModel {
     private String description;
     private String color;
     private String colorName;
-    private int price;
+    private double price;
     private int quantity;
     private String discountCode;
     private int discountAmount;
+    
+    
 	public int getCompanyId() {
 		return companyId;
 	}
@@ -69,10 +71,10 @@ public class ProductModel {
 	public void setColorName(String colorName) {
 		this.colorName = colorName;
 	}
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	public int getQuantity() {
