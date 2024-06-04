@@ -1,9 +1,11 @@
 package com.example.demo.model;
 
+import java.util.List;
+
 public class ProductModel {
 	
 	private int companyId;
-    private String productName;
+    private String title;
     private int categoryId;
     private int subCategoryId;
     private String sku;
@@ -11,6 +13,7 @@ public class ProductModel {
     private String description;
     private String color;
     private String colorName;
+    private List<Object> colors;
     private double price;
     private int quantity;
     private String discountCode;
@@ -22,12 +25,6 @@ public class ProductModel {
 	}
 	public void setCompanyId(int companyId) {
 		this.companyId = companyId;
-	}
-	public String getProductName() {
-		return productName;
-	}
-	public void setProductName(String productName) {
-		this.productName = productName;
 	}
 	public int getCategoryId() {
 		return categoryId;
@@ -94,6 +91,18 @@ public class ProductModel {
 	}
 	public void setDiscountAmount(int discountAmount) {
 		this.discountAmount = discountAmount;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public List<Object> getColors() {
+		return colors;
+	}
+	public void setColors(List<Object> colors) {
+		this.colors = colors;
 	}
 
     
