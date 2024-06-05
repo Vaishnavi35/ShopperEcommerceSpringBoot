@@ -11,10 +11,8 @@ public class ProductModel {
     private String sku;
     private char stockStatus;
     private String description;
-    private String color;
-    private String colorName;
-    private List<Object> colors;
-    private double price;
+    private ColorsModel colors;
+	private double price;
     private int quantity;
     private String discountCode;
     private int discountAmount;
@@ -56,18 +54,6 @@ public class ProductModel {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getColor() {
-		return color;
-	}
-	public void setColor(String color) {
-		this.color = color;
-	}
-	public String getColorName() {
-		return colorName;
-	}
-	public void setColorName(String colorName) {
-		this.colorName = colorName;
-	}
 	public double getPrice() {
 		return price;
 	}
@@ -98,10 +84,10 @@ public class ProductModel {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public List<Object> getColors() {
+	public ColorsModel getColors() {
 		return colors;
 	}
-	public void setColors(List<Object> colors) {
+	public void setColors(ColorsModel colors) {
 		this.colors = colors;
 	}
 

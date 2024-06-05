@@ -14,8 +14,8 @@ public class ProductService {
 	@Autowired
 	private ProductRepository productRepo;
 	
-	public void insertProducts(List<ProductModel> products){
-		productRepo.insertProductsInDB(products);
+	public String insertProducts(List<ProductModel> products){
+		return productRepo.insertProductsInDB(products);
 	}
 
 }
