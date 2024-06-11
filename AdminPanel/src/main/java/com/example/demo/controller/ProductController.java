@@ -26,7 +26,7 @@ public class ProductController {
 	public ResponseEntity<String> insertProduct(@RequestBody List<ProductModel> products) {
 		String msg = " ";
 		HttpStatus status_code = HttpStatus.OK;
-		System.out.println("insert product : "+products);
+//		System.out.println("insert product : "+products);
 		String status = productService.insertProducts(products);
 		if(status == "Success") {
 			msg = "Product(s) inserted successfully.";

@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductModel {
@@ -9,14 +10,14 @@ public class ProductModel {
     private int categoryId;
     private int subCategoryId;
     private String sku;
-    private char stockStatus;
+    private String stock_status;
     private String description;
     private ColorsModel colors;
 	private double price;
     private int quantity;
     private String discountCode;
     private int discountAmount;
-    
+    private ArrayList<String> sizes ;
     
 	public int getCompanyId() {
 		return companyId;
@@ -41,12 +42,6 @@ public class ProductModel {
 	}
 	public void setSku(String sku) {
 		this.sku = sku;
-	}
-	public char getStockStatus() {
-		return stockStatus;
-	}
-	public void setStockStatus(char stockStatus) {
-		this.stockStatus = stockStatus;
 	}
 	public String getDescription() {
 		return description;
@@ -89,6 +84,18 @@ public class ProductModel {
 	}
 	public void setColors(ColorsModel colors) {
 		this.colors = colors;
+	}
+	public ArrayList<String> getSizes() {
+		return sizes;
+	}
+	public void setSizes(ArrayList<String> sizes) {
+		this.sizes = sizes;
+	}
+	public String getStock_status() {
+		return stock_status;
+	}
+	public void setStock_status(String stock_status) {
+		this.stock_status = stock_status;
 	}
 
     
