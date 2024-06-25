@@ -21,7 +21,20 @@ public class ProductService {
 
 	public Map<String, Object> getAllProducts() {
 		return productRepo.getProductsInDB();
-		
 	}
 
+	public Map<String, Object> getCategory() {
+		// TODO Auto-generated method stub
+		return productRepo.getCategory();
+	}
+
+	public Map<String, Object> getSubCategory() {
+		// TODO Auto-generated method stub
+		return productRepo.getSubCategory();
+	}
+
+	public Map<String, Object> getProductType() {
+		// TODO Auto-generated method stub
+		return productRepo.getProductType();
+	}
 }
