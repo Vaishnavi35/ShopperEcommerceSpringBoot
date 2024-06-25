@@ -1,10 +1,16 @@
 package com.example.demo.repostitory;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.jdbc.core.RowMapper;
+import java.sql.ResultSet;
 
 import com.example.demo.model.ColorsModel;
 import com.example.demo.model.ProductModel;
@@ -40,6 +46,7 @@ public class ProductRepository {
 				+ "`description`,\r\n"
 				+ "`color`,\r\n"
 				+ "`color_name`,\r\n"
+				+ "`sizes`,\r\n"
 				+ "`price`,\r\n"
 				+ "`quantity`,\r\n"
 				+ "`discount_code`,\r\n"
@@ -65,7 +72,7 @@ public class ProductRepository {
 			
 			try {
 				jdbcTemplate.update(sql,product.getTitle(),product.getSku(),product.getStock_status(), product.getDescription(), colors.getColor(), colors.getName(),
-						product.getPrice(), product.getQuantity(), product.getDiscountCode(), product.getDiscountAmount());
+									product.getSizes(), product.getPrice(), product.getQuantity(), product.getDiscountCode(), product.getDiscountAmount());
 			}catch(Exception e) {
 				System.out.println("error : "+e);
 				return "Failed";
@@ -76,4 +83,54 @@ public class ProductRepository {
 		return "Success";
 		
 	}
+//	SELECT `products`.`product_id`,
+//    `products`.`company_id`,
+//    `products`.`product_name`,
+//    `products`.`category_id`,
+//    `products`.`sub_category_id`,
+//    `products`.`SKU`,
+//    `products`.`stock_status`,
+//    `products`.`description`,
+//    `products`.`color`,
+//    `products`.`color_name`,
+//    `products`.`sizes`,
+//    `products`.`price`,
+//    `products`.`quantity`,
+//    `products`.`discount_code`,
+//    `products`.`discount_amount`,
+//    `products`.`create_at`,
+//    `products`.`updated_at`
+//FROM `admin_panel`.`products`;
+
+	public Map<String, Object> getProductsInDB() {
+//		ArrayList<Map<String,Object>> result = new ArrayList<>(); 
+		Map<String,Object> Response = new HashMap<>(); 
+		String sql = "select product_name,category_id,sub_category_id, date_format(create_at, '%b %c, %Y') as date_added from products";
+//		BeanPropertyRowMapper<ProductModel> productRowMapper = new BeanPropertyRowMapper<ProductModel>(ProductModel.class);
+		try {
+			List<Map<String,Object>> result = jdbcTemplate.queryForList(sql);
+			Response.put("response", result);
+			Response.put("status", "success");
+//			 List<Map<String,Object>> result = jdbcTemplate.queryForList(sql);
+//			 System.out.println("result : "+result);
+//			return jdbcTemplate.queryForList(sql);
+			
+		}catch(Exception e) {
+			System.out.println("error : "+e);
+			Response.put("response", e);
+			Response.put("status", "failed");
+//			return null;
+		}
+		return Response;
+	}
+	
+//	private static class ProductRowMapper implements RowMapper<ProductModel>{
+//		@Override
+//		public ProductModel mapRow(ResultSet rs, int rowNum) {
+//			int categoryId = rs.getInt("category_id");
+//		    int subCategoryId  = rs.getInt("sub_category_id");
+//		    return new ProductModel(categoryId, subCategoryId);
+//		}
+//	}
+	
 }

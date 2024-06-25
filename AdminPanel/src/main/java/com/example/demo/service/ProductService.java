@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,11 @@ public class ProductService {
 	
 	public String insertProducts(List<ProductModel> products){
 		return productRepo.insertProductsInDB(products);
+	}
+
+	public Map<String, Object> getAllProducts() {
+		return productRepo.getProductsInDB();
+		
 	}
 
 }
