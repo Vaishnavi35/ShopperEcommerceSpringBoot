@@ -54,4 +54,29 @@ public class ProductController {
 		return ResponseEntity.status(status_code).body(jsonResponse);
 	}
 
+	@GetMapping("/getCategories")
+	public ResponseEntity<String> getProductCategory(){
+		Map<String, Object> Response = new HashMap<>();
+		HttpStatus status_code = HttpStatus.OK;
+		Gson gson = new Gson();
+		
+		Map<String, Object> CategoryResult = productService.getCategory();
+		Map<String, Object> SubCategoryResult = productService.getSubCategory();
+		Map<String, Object> ProductType = productService.getProductType();
+		
+		
+		
+		
+		if(CategoryResult.get("status")  == "failed" || SubCategoryResult.get("status")  == "failed" || ProductType.get("status")  == "failed") {
+			status_code = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		Response.put("categories", CategoryResult.get("category"));
+		Response.put("sub_categories", CategoryResult.get("sub_category"));
+		Response.put("product_types", CategoryResult.get("product_type"));
+		String jsonResponse = gson.toJson(Response);
+		return ResponseEntity.status(status_code).body(jsonResponse);
+		
+	}
+
 }
