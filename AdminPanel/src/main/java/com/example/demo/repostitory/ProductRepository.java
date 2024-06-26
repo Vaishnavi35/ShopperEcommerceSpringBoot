@@ -59,25 +59,28 @@ public class ProductRepository {
 		Map<String,Object> Response = new HashMap<>(); 
 		String sql = "select product_name,category_id,sub_category_id, date_format(create_at, '%b %c, %Y') as date_added from products";
 		try {
+			System.out.println("getProducts try");
 			List<Map<String,Object>> result = jdbcTemplate.queryForList(sql);
 			Response.put("response", result);
 			Response.put("status", "success");
 			
 		}catch(Exception e) {
+			System.out.println("getProducts catch");
 			System.out.println("error : "+e);
 			Response.put("response", e);
 			Response.put("status", "failed");
 		}
+		System.out.println("getProducts after try catch");
 		return Response;
 	}
 	
 	public Map<String,Object> getCategory(){
 		Map<String,Object> Response = new HashMap<>(); 
-		String category_query = "select ca.category_id, ca.name from category ca";
+		String category_query = "select category_id as value, category_name as label from category";
 		
 		try {
 			List<Map<String,Object>> Result1 = jdbcTemplate.queryForList(category_query);
-			Response.put("category", Result1);
+			Response.put("categories", Result1);
 			Response.put("status", "success");
 		}catch(Exception e) {
 			System.out.println("error : "+e);
@@ -88,11 +91,11 @@ public class ProductRepository {
 	}
 	
 	public Map<String,Object> getSubCategory() {
-		String sub_category_query = "select sc.sub_category_id, sc.name from sub_category sc";
+		String sub_category_query = "select sub_category_id as value, `sub_category_name` as label from sub_category where category_id = ?";
 		Map<String,Object> Response = new HashMap<>();
 		try {
-			List<Map<String, Object>> Result = jdbcTemplate.queryForList(sub_category_query);
-			Response.put("sub_category", Result);
+			List<Map<String, Object>> Result = jdbcTemplate.queryForList(sub_category_query,1);
+			Response.put("sub_categories", Result);
 			Response.put("status", "success");
 		}catch(Exception e) {
 			System.out.println("error : "+e);
@@ -103,11 +106,11 @@ public class ProductRepository {
 	}
 	
 	public Map<String,Object> getProductType() {
-		String product_type_query = "select pt.category_id, pt.sub_category_id, pt.name from product_type pt";
+		String product_type_query = "select product_type_name as value, product_type_name as label from product_type where category_id = ? and sub_category_id = ?"; 
 		Map<String,Object> Response = new HashMap<>();
 		try {
-			List<Map<String, Object>> Result = jdbcTemplate.queryForList(product_type_query);
-			Response.put("product_type", Result);
+			List<Map<String, Object>> Result = jdbcTemplate.queryForList(product_type_query, 1, 1);
+			Response.put("product_types", Result);
 			Response.put("status", "success");
 		}catch(Exception e) {
 			System.out.println("error : "+e);
